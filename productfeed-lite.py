@@ -9,6 +9,19 @@ products = response.json()
 cleaned_products = []
 
 for p in products:
+    rate = p["rating"]["rate"]
+    
+    if rate >= 4.5:
+        rating_label = "Excellent product"
+    elif rate >= 4.0:
+        rating_label = "Great product "
+    elif rate >= 3.0:
+        rating_label = "Good product "
+    elif rate >= 2.0:
+        rating_label = "Average product "
+    else:
+        rating_label = "Bad product "
+
     clean = {
         "id": p["id"],
         "title": p["title"].strip().title(),
@@ -16,6 +29,7 @@ for p in products:
         "is_expensive": p["price"] > 100,
         "category": p["category"],
         "description": p["description"].strip(),
+        "rating_label": rating_label,
     }
     cleaned_products.append(clean)
 
